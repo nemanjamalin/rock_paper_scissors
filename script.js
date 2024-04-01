@@ -42,11 +42,26 @@ function playRound(playerSelection,computerSelection){
 } // not so good way to determine if you win or lose, but works for this purpose
 
 
-const playerSelection = prompt('Write your choice:');
-const computerSelection = getComputerChoice();
+function playGame(){
+    const playerSelection = prompt('Write your choice:'); // receive user input from prompt as choice
+    const computerSelection = getComputerChoice(); // get computers choice
 
-console.log(playRound(playerSelection,computerSelection));
-console.log('player score:',playerScore);
-console.log('computer score:',computerScore);
+    console.log(playRound(playerSelection,computerSelection)); // console log who wins current round
+    console.log('player score:',playerScore); // write score of player
+    console.log('computer score:',computerScore); // write score of player
+    console.log('----------------------------------------'); // for easier reading of console
+}// function playGame which plays one round each team it's called and updates the console with current scores
+
+for(let i=0;i<5;i++){
+    playGame(); // for loop to call playGame function 5 times
+}
+
+playerScore > computerScore ?
+    console.log('Player wins out of 5 rounds')
+: playerScore < computerScore ?
+    console.log('Computer wins out of 5 rounds')
+:   console.log(`It's a tie out of 5 rounds`); //tenary operator, to determine a winner
+
+
 
 
