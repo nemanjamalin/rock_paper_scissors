@@ -1,10 +1,43 @@
+//VARIABLES
+
 let playerScore = 0;
 let computerScore = 0;
+let roundNumber = 1;
+const computerCHOICES = ['rock','paper','scissors'];
+
+const choices = document.querySelector('.choices');
+
+const logs = document.querySelector('.logs');
+
+const restart = document.querySelector('button');
 
 
-const CHOICES = ['rock','paper','scissors'];
+//EVENT LISTENERS
+choices.addEventListener('click', function(e){
+    const element = e.target;
+    const choice = element.dataset.choice;
+    
+    if(playerScore === 5 || computerScore === 5) 
+    {
+        return;
+    }
+    playGame(choice);
+});
 
 
+restart.addEventListener('click', innit);
+
+
+//FUNCTIONS
+
+function innit(){
+    playerScore = 0;
+    computerScore = 0;
+    playerSelection = "";
+    roundNumber = 1;
+
+    logs.innerHTML = '';
+}
 
 function getCapitalizedWord(word){
     word = word[0].toUpperCase() + word.slice(1).toLowerCase();
@@ -14,17 +47,9 @@ function getCapitalizedWord(word){
 function getComputerChoice(){
     const choiceIndex = Math.floor(Math.random()*3);
 
-    return CHOICES[choiceIndex];
+    return computerCHOICES[choiceIndex];
 }
 
-function getPlayerChoice(){
-    const playerSelection = prompt('Please choose rock/paper/scissors:').toLowerCase();
-    console.log(playerSelection);
-    if(CHOICES.includes(playerSelection)) return playerSelection;
-
-    alert('Not valid, try again!')
-    return getPlayerChoice();
-}
 
 
 
@@ -59,28 +84,43 @@ function playRound(playerSelection,computerSelection){
 } // not so good way to determine if you win or lose, but works for this purpose
 
 
-function playGame(roundNumber){
-    const playerSelection = getPlayerChoice(); 
+function playGame(playerChoice){
+
+    const playerSelection = playerChoice; 
     const computerSelection = getComputerChoice(); 
-    const roundWinnerMessage = playRound(playerSelection,computerSelection);
+    const roundWinnerMessage = playRound(playerSelection,computerSelection); 
+    //function call, determines who wins, returns the according message;
 
-    alert(`
-        round ${roundNumber}/5
-        ${roundWinnerMessage}
-        player score: ${playerScore}
-        computer score: ${computerScore}
-    `)
+  
+        logs.innerHTML=`
+        round ${roundNumber}/5 <br>
+        ${roundWinnerMessage} <br>
+        player score: ${playerScore} <br>
+        computer score: ${computerScore} <br>
+        `
+        logs.innerHTML+='<br>';
+
+        logs.innerHTML += playerScore === 5 ? `You win` 
+        : computerScore === 5 ? 'Computer wins' : '';
+
+        roundNumber++;
+        // playerScore > computerScore ?
+        // logs.innerHTML += 'Player wins out of 5 rounds'
+        // : playerScore < computerScore ?
+        // logs.innerHTML+='Computer wins out of 5 rounds'
+        // :  
+        // logs.innerHTML +=`It's a tie out of 5 rounds` //tenary operator, to determine a winner
+      
 }
 
-for(let i=0;i<5;i++){
-    playGame(i+1); 
-}
 
-playerScore > computerScore ?
-    alert('Player wins out of 5 rounds')
-: playerScore < computerScore ?
-    alert('Computer wins out of 5 rounds')
-:   alert(`It's a tie out of 5 rounds`); //tenary operator, to determine a winner
+
+
+
+
+
+
+
 
 
 

@@ -18,7 +18,7 @@ body{
 }
 
 .container{
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 .container .heading-text{
@@ -50,4 +50,8 @@ body{
 }
 .container .choices .choice-scissors{
     background-image: url('./images/rock-paper-scissors-296853_640.png'); 
+}
+
+.logs{
+    text-align: center;
 }
