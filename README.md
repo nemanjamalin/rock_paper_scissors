@@ -2,6 +2,7 @@
 
 
 Project: Rock Paper Scissors
+
 Foundations course - The Odin Project
 
 Simple rock paper scissors game against computer.
